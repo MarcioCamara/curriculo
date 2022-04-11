@@ -1,0 +1,295 @@
+<h3 nz-typography>
+  Preencha seus dados 💼, escolha um tema 🎨, baixe seu currículo ❤️
+</h3>
+
+<form nz-form [formGroup]="resumeForm" nzLayout="vertical">
+  <nz-divider nzText="1. Dados Pessoais" nzOrientation="left" class="divider"></nz-divider>
+
+  <div nz-row [nzGutter]="8">
+    <div nz-col [nzSpan]="14">
+      <nz-form-item>
+        <nz-form-label nzFor="name">
+          Nome
+        </nz-form-label>
+
+        <nz-form-control>
+          <input nz-input placeholder="Nome" formControlName="name" attr.id="name" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="10">
+      <nz-form-item>
+        <nz-form-label nzFor="desiredRole">
+          Cargo Desejado
+        </nz-form-label>
+
+        <nz-form-control>
+          <input nz-input placeholder="Cargo Desejado" formControlName="desiredRole" attr.id="desiredRole" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <nz-spin nzTip="Carregando..." [nzSpinning]="isLoading">
+    <div nz-row [nzGutter]="8">
+      <div nz-col [nzSpan]="4">
+        <nz-form-item>
+          <nz-form-label nzFor="postalCode">
+            CEP
+          </nz-form-label>
+
+          <nz-form-control>
+            <input #postalCode nz-input placeholder="CEP" formControlName="postalCode" attr.id="postalCode"
+              mask="00000-000" (blur)="populateAddress()" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="10">
+        <nz-form-item>
+          <nz-form-label nzFor="address">
+            Endereço
+          </nz-form-label>
+
+          <nz-form-control>
+            <input nz-input placeholder="Endereço" formControlName="address" attr.id="address" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label nzFor="block">
+            Bairro
+          </nz-form-label>
+
+          <nz-form-control>
+            <input nz-input placeholder="Bairro" formControlName="block" attr.id="block" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="2">
+        <nz-form-item>
+          <nz-form-label nzFor="state">
+            Estado
+          </nz-form-label>
+
+          <nz-form-control>
+            <nz-select formControlName="state">
+              <nz-option *ngFor="let state of states" [nzValue]="state" [nzLabel]="state"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </nz-spin>
+
+  <div nz-row [nzGutter]="8">
+    <div nz-col [nzSpan]="7">
+      <nz-form-item>
+        <nz-form-label nzFor="phone">
+          Telefone
+        </nz-form-label>
+
+        <nz-form-control>
+          <input nz-input type="tel" placeholder="(00) 0000-0000" formControlName="phone" attr.id="phone"
+            mask="(00) 0000-0000" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="7">
+      <nz-form-item>
+        <nz-form-label nzFor="cellphone">
+          Celular
+        </nz-form-label>
+
+        <nz-form-control>
+          <input nz-input type="tel" placeholder="(00) 00000-0000" formControlName="cellphone" attr.id="cellphone"
+            mask="(00) 00000-0000" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="10">
+      <nz-form-item>
+        <nz-form-label nzFor="email">
+          E-mail
+        </nz-form-label>
+
+        <nz-form-control>
+          <input nz-input type="email" placeholder="exemplo@exemplo" formControlName="email" attr.id="email" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <nz-divider nzText="2. Formação Acadêmica" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-container formArrayName="courses">
+    <ng-container *ngFor="let courseForm of courses.controls; let i = index">
+      <div [formGroupName]="i">
+        <div nz-row [nzGutter]="8">
+          <div nz-col [nzSpan]="9">
+            <nz-form-item>
+              <nz-form-label nzFor="courseName">
+                Curso
+              </nz-form-label>
+
+              <nz-form-control>
+                <input nz-input placeholder="Curso" formControlName="name" attr.id="courseName" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="9">
+            <nz-form-item>
+              <nz-form-label nzFor="institution">
+                Instituição
+              </nz-form-label>
+
+              <nz-form-control>
+                <input nz-input placeholder="Instituição" formControlName="institution" attr.id="institution" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="4">
+            <nz-form-item>
+              <nz-form-label nzFor="yearOfConclusion">
+                Ano de Conclusão
+              </nz-form-label>
+
+              <nz-date-picker nzMode="year" formControlName="yearOfConclusion" attr.id="yearOfConclusion">
+              </nz-date-picker>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="1" *ngIf="i > 0">
+            <nz-form-item>
+              <nz-form-label></nz-form-label>
+
+              <button nz-button nzType="primary" nzDanger (click)="deleteCourse(i)">
+                <i nz-icon nzType="delete" nzTheme="outline"></i>
+              </button>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="1" *ngIf="courses.controls.length === i + 1">
+            <nz-form-item>
+              <nz-form-label></nz-form-label>
+
+              <button nz-button nzType="primary" (click)="addCourse()">
+                <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+              </button>
+            </nz-form-item>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <nz-divider nzText="3. Experiência Profissional" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-container formArrayName="jobs">
+    <ng-container *ngFor="let jobForm of jobs.controls; let i = index">
+      <div [formGroupName]="i">
+        <div nz-row [nzGutter]="8">
+          <div nz-col [nzSpan]="7">
+            <nz-form-item>
+              <nz-form-label nzFor="enterprise">
+                Empresa
+              </nz-form-label>
+
+              <nz-form-control>
+                <input nz-input placeholder="Empresa" formControlName="name" attr.id="enterprise" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="4">
+            <nz-form-item>
+              <nz-form-label nzFor="entry">
+                Mês/Ano Entrada
+              </nz-form-label>
+
+              <nz-form-control>
+                <input nz-input placeholder="mm/aaaa" formControlName="entry" attr.id="entry" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="4">
+            <nz-form-item>
+              <nz-form-label nzFor="departure">
+                Mês/Ano Saída
+              </nz-form-label>
+
+              <nz-form-control>
+                <input nz-input placeholder="mm/aaaa" formControlName="departure" attr.id="departure" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="7">
+            <nz-form-item>
+              <nz-form-label nzFor="role">
+                Cargo
+              </nz-form-label>
+
+              <nz-form-control>
+                <input nz-input placeholder="Cargo" formControlName="role" attr.id="role" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="1" *ngIf="i > 0">
+            <nz-form-item>
+              <nz-form-label></nz-form-label>
+
+              <button nz-button nzType="primary" nzDanger (click)="deleteJob(i)">
+                <i nz-icon nzType="delete" nzTheme="outline"></i>
+              </button>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="1" *ngIf="jobs.controls.length === i + 1">
+            <nz-form-item>
+              <nz-form-label></nz-form-label>
+
+              <button nz-button nzType="primary" (click)="addJob()">
+                <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+              </button>
+            </nz-form-item>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <nz-divider nzText="4. Qualificações" nzOrientation="left" class="divider"></nz-divider>
+
+  <div nz-row [nzGutter]="8">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-control>
+          <nz-select nzMode="tags" nzPlaceHolder="Qualificações" formControlName="skills" nzSize="large">
+            <nz-option *ngFor="let option of skillsList" [nzLabel]="option" [nzValue]="option">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <nz-divider nzText="5. Certificados" nzOrientation="left" class="divider"></nz-divider>
+
+  <nz-divider nzText="6. Informações Adicionais" nzOrientation="left" class="divider"></nz-divider>
+
+  <nz-divider class="divider"></nz-divider>
+
+  <button nz-button nzType="primary" (click)="generateResume()">Gerar Currículo</button>
+  <button nz-button nzType="primary" nzDanger (click)="resetForm()" class="clear_button">Limpar Formulário</button>
+</form>
