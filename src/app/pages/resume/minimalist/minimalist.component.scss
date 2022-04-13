@@ -1,0 +1,61 @@
+.resume-container {
+  border: 1px solid #f0f0f0;
+  padding: 32px;
+}
+
+.resume-name {
+  margin-bottom: 0;
+}
+
+.resume-role {
+  margin-top: 0 !important;
+  font-weight: 100;
+  margin-bottom: 2em;
+}
+
+.field-name {
+  font-weight: bold;
+}
+
+.social-media {
+  font-size: 1.5em;
+  margin-right: 16px;
+}
+
+.social-media-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.job-enterprise,
+.certification-name {
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.job-location,
+.certifcation-year-of-expiration {
+  color: #777777;
+}
+
+.job-role,
+.certification-institution {
+  font-size: 1.2em;
+}
+
+.course-name {
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.course-institution {
+  font-size: 1.2em;
+}
+
+.course-title-template {
+  background-color: #fafafa;
+}
+
+.print-button {
+  margin-left: 8px;
+}

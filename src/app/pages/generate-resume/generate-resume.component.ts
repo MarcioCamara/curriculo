@@ -112,9 +112,11 @@ export class GenerateResumeComponent implements OnInit {
       phone: [''],
       cellphone: [''],
       email: ['', [Validators.email]],
+      summary: [''],
       socialMedias: this.fb.array([
         this.fb.group({
-          name: [''],
+          username: [''],
+          icon: [''],
           url: [''],
         }),
       ]),
@@ -127,10 +129,11 @@ export class GenerateResumeComponent implements OnInit {
       ]),
       jobs: this.fb.array([
         this.fb.group({
-          name: [''],
+          enterprise: [''],
           entry: [''],
           departure: [''],
           role: [''],
+          location: [''],
         }),
       ]),
       skills: [null],

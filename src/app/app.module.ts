@@ -11,6 +11,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NZ_I18N, pt_BR } from 'ng-zorro-antd/i18n';
@@ -26,8 +27,9 @@ import { NgxMaskModule } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GenerateResumeComponent } from './pages/generate-resume/generate-resume.component';
-import { AddressResource } from './resources/address/address.resource';
+import { MinimalistComponent } from './pages/resume/minimalist/minimalist.component';
 import { ResumeComponent } from './pages/resume/resume.component';
+import { AddressResource } from './resources/address/address.resource';
 
 registerLocaleData(pt);
 
@@ -41,6 +43,7 @@ const icons: IconDefinition[] = [
     AppComponent,
     GenerateResumeComponent,
     ResumeComponent,
+    MinimalistComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ const icons: IconDefinition[] = [
     NzModalModule,
     NzSpinModule,
     NzCardModule,
+    NzDescriptionsModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: pt_BR },

@@ -1,0 +1,113 @@
+<div class="resume-container">
+    <h1 nz-typography class="resume-name">{{ resume.name }}</h1>
+
+    <h3 nz-typography class="resume-role">{{ resume.desiredRole }}</h3>
+
+    <p>
+        <span class="field-name">
+            Endereço:
+        </span>
+
+        {{ resume.address }}, {{ resume.block }} - {{ resume.city }}/{{ resume.state }} - {{ resume.postalCode }}
+    </p>
+
+    <p>
+        <span class="field-name">
+            Telefones:
+        </span>
+
+        {{ resume.phone }}/{{ resume.cellphone }}
+    </p>
+
+    <p>
+        <span class="field-name">
+            E-mail:
+        </span>
+
+        {{ resume.email }}
+    </p>
+
+    <p>
+        <span class="field-name">
+            Resumo:
+        </span>
+
+        {{ resume.summary }}
+    </p>
+
+    <div class="social-media-container">
+        <a *ngFor="let socialMedia of resume.socialMedias" [href]="socialMedia.url" target="_blank">
+            <p class="social-media">
+                <i nz-icon [nzType]="socialMedia.icon"></i>
+
+                {{ socialMedia.username }}
+            </p>
+        </a>
+    </div>
+
+    <nz-divider></nz-divider>
+
+    <h2 nzTypography>Qualificações</h2>
+
+    <ul>
+        <li *ngFor="let skill of resume.skills">{{ skill }}</li>
+    </ul>
+
+    <nz-divider></nz-divider>
+
+    <h2 nzTypography>Experiência Profissional</h2>
+
+    <nz-descriptions nzBordered>
+        <nz-descriptions-item *ngFor="let job of resume.jobs"
+            [nzTitle]="'Período: ' + job.entry + ' - ' + job.departure" nzSpan="3">
+            <p class="job-enterprise">{{ job.enterprise }}</p>
+            <p class="job-location">{{ job.location }}</p>
+            <p class="job-role">{{ job.role }}</p>
+        </nz-descriptions-item>
+    </nz-descriptions>
+
+    <nz-divider></nz-divider>
+
+    <h2 nzTypography>Formação Acadêmica</h2>
+
+    <nz-descriptions nzBordered>
+        <nz-descriptions-item *ngFor="let course of resume.courses"
+            [nzTitle]="'Ano de Conclusão: ' + course.yearOfConclusion" nzSpan="3">
+            <p class="course-name">{{ course.name }}</p>
+            <p class="course-institution">{{ course.institution }}</p>
+        </nz-descriptions-item>
+    </nz-descriptions>
+
+    <nz-divider></nz-divider>
+
+    <h2 nzTypography>Certificações</h2>
+
+    <nz-descriptions nzBordered>
+        <nz-descriptions-item *ngFor="let certification of resume.certifications"
+            [nzTitle]="'Ano da Certificação: ' + certification.yearOfConclusion" nzSpan="3">
+            <p class="certification-name">{{ certification.name }}</p>
+
+            <p class="certification-year-of-expiration">
+                Valido até:
+                {{ certification.yearOfExpiration ? certification.yearOfExpiration : 'Indefinido' }}
+            </p>
+
+            <p class="certification-institution">{{ certification.institution }}</p>
+        </nz-descriptions-item>
+    </nz-descriptions>
+
+    <nz-divider></nz-divider>
+
+    <h2 nzTypography>Informações Adicionais</h2>
+
+    <ul>
+        <li *ngFor="let additionalInformation of resume.additionalInformations">
+            {{ additionalInformation.additionalInformation }}
+        </li>
+    </ul>
+</div>
+
+<nz-divider class="divider"></nz-divider>
+
+<button nz-button nzType="primary" (click)="downloadResume()">Baixar Currículo</button>
+<button nz-button nzType="primary" (click)="printResume()" class="print-button">Imprimir Currículo</button>

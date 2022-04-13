@@ -126,7 +126,19 @@
     </div>
   </div>
 
-  <nz-divider nzText="2. Redes Sociais e Site Pessoal" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider nzText="2. Resumo" nzOrientation="left" class="divider"></nz-divider>
+
+  <div nz-row [nzGutter]="8">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-control>
+          <textarea nz-input placeholder="Resumo" formControlName="summary" attr.id="summary" rows="5"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <nz-divider nzText="3. Redes Sociais e Site Pessoal" nzOrientation="left" class="divider"></nz-divider>
 
   <ng-container formArrayName="socialMedias">
     <ng-container *ngFor="let socialMediaForm of socialMedias.controls; let i = index">
@@ -139,9 +151,9 @@
               </nz-form-label>
 
               <nz-form-control>
-                <nz-select formControlName="name">
+                <nz-select formControlName="icon">
                   <nz-option *ngFor="let socialMedia of socialMediasList" nzCustomContent [nzLabel]="socialMedia.name"
-                    [nzValue]="socialMedia.name">
+                    [nzValue]="socialMedia.icon">
                     <i nz-icon [nzType]="socialMedia.icon"></i>
                     {{ socialMedia.name }}
                   </nz-option>
@@ -150,9 +162,21 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="16">
+          <div nz-col [nzSpan]="4">
             <nz-form-item>
-              <nz-form-label nzFor="socialMediaName">
+              <nz-form-label nzFor="username">
+                Nome de Usuário
+              </nz-form-label>
+
+              <nz-form-control>
+                <input nz-input placeholder="Nome de Usuário" formControlName="username" attr.id="username" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-label nzFor=" socialMediaName">
                 URL
               </nz-form-label>
 
@@ -186,7 +210,7 @@
     </ng-container>
   </ng-container>
 
-  <nz-divider nzText="3. Formação Acadêmica" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider nzText="4. Formação Acadêmica" nzOrientation="left" class="divider"></nz-divider>
 
   <ng-container formArrayName="courses">
     <ng-container *ngFor="let courseForm of courses.controls; let i = index">
@@ -251,25 +275,25 @@
     </ng-container>
   </ng-container>
 
-  <nz-divider nzText="4. Experiência Profissional" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider nzText="5. Experiência Profissional" nzOrientation="left" class="divider"></nz-divider>
 
   <ng-container formArrayName="jobs">
     <ng-container *ngFor="let jobForm of jobs.controls; let i = index">
       <div [formGroupName]="i">
         <div nz-row [nzGutter]="8">
-          <div nz-col [nzSpan]="7">
+          <div nz-col [nzSpan]="6">
             <nz-form-item>
               <nz-form-label nzFor="enterprise">
                 Empresa
               </nz-form-label>
 
               <nz-form-control>
-                <input nz-input placeholder="Empresa" formControlName="name" attr.id="enterprise" />
+                <input nz-input placeholder="Empresa" formControlName="enterprise" attr.id="enterprise" />
               </nz-form-control>
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="4">
+          <div nz-col [nzSpan]="3">
             <nz-form-item>
               <nz-form-label nzFor="entry">
                 Mês/Ano Entrada
@@ -281,7 +305,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="4">
+          <div nz-col [nzSpan]="3">
             <nz-form-item>
               <nz-form-label nzFor="departure">
                 Mês/Ano Saída
@@ -301,6 +325,18 @@
 
               <nz-form-control>
                 <input nz-input placeholder="Cargo" formControlName="role" attr.id="role" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="3">
+            <nz-form-item>
+              <nz-form-label nzFor="location">
+                Cidade/Estado
+              </nz-form-label>
+
+              <nz-form-control>
+                <input nz-input placeholder="Cidade/Estado" formControlName="location" attr.id="location" />
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -329,7 +365,7 @@
     </ng-container>
   </ng-container>
 
-  <nz-divider nzText="5. Qualificações" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider nzText="6. Qualificações" nzOrientation="left" class="divider"></nz-divider>
 
   <div nz-row [nzGutter]="8">
     <div nz-col [nzSpan]="24">
@@ -344,7 +380,7 @@
     </div>
   </div>
 
-  <nz-divider nzText="6. Certificados" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider nzText="7. Certificados" nzOrientation="left" class="divider"></nz-divider>
 
   <ng-container formArrayName="certifications">
     <ng-container *ngFor="let certificationForm of certifications.controls; let i = index">
@@ -420,7 +456,7 @@
     </ng-container>
   </ng-container>
 
-  <nz-divider nzText="7. Informações Adicionais" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider nzText="8. Informações Adicionais" nzOrientation="left" class="divider"></nz-divider>
 
   <ng-container formArrayName="additionalInformations">
     <ng-container *ngFor="let additionalInformationForm of additionalInformations.controls; let i = index">
@@ -461,7 +497,7 @@
     </ng-container>
   </ng-container>
 
-  <nz-divider nzText="8. Tema" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider nzText="9. Tema" nzOrientation="left" class="divider"></nz-divider>
 
   <div nz-row [nzGutter]="8">
     <div nz-col [nzSpan]="8" *ngFor="let card of themeCards">
