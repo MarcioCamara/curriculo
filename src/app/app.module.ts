@@ -9,6 +9,7 @@ import { IconDefinition } from '@ant-design/icons-angular';
 import { DeleteOutline, PlusCircleOutline } from '@ant-design/icons-angular/icons';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -26,6 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GenerateResumeComponent } from './pages/generate-resume/generate-resume.component';
 import { AddressResource } from './resources/address/address.resource';
+import { ResumeComponent } from './pages/resume/resume.component';
 
 registerLocaleData(pt);
 
@@ -38,6 +40,7 @@ const icons: IconDefinition[] = [
   declarations: [
     AppComponent,
     GenerateResumeComponent,
+    ResumeComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,7 @@ const icons: IconDefinition[] = [
     NzSelectModule,
     NzModalModule,
     NzSpinModule,
+    NzCardModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: pt_BR },

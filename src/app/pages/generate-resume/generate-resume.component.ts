@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Address } from 'src/app/models/Address';
 import { AddressResource } from 'src/app/resources/address/address.resource';
 
@@ -11,6 +12,7 @@ import { AddressResource } from 'src/app/resources/address/address.resource';
 export class GenerateResumeComponent implements OnInit {
   resumeForm!: FormGroup;
   isLoading = false;
+  selected: any = null;
 
   states = [
     'SP',
@@ -22,12 +24,65 @@ export class GenerateResumeComponent implements OnInit {
     'Angular',
     'Laravel',
     'PHP',
+  ];
+
+  socialMediasList = [
+    {
+      name: 'LinkedIn',
+      icon: 'linkedin',
+    },
+    {
+      name: 'Instagram',
+      icon: 'instagram',
+    },
+    {
+      name: 'Facebook',
+      icon: 'facebook',
+    },
+    {
+      name: 'Twitter',
+      icon: 'twitter',
+    },
+    {
+      name: 'Medium',
+      icon: 'medium',
+    },
+    {
+      name: 'Site Pessoal',
+      icon: 'global',
+    },
+  ];
+
+  themeCards = [
+    {
+      id: 1,
+      title: 'Minimalista',
+      description: 'Minimalismo é sinônimo de essência!',
+      cover: 'assets/minimalista.jpg',
+    },
+    {
+      id: 2,
+      title: 'Elegante',
+      description: 'Elegância é o bom senso vestido de simplicidade!',
+      cover: 'assets/elegante.jpg',
+    },
+    {
+      id: 3,
+      title: 'Artístico',
+      description: 'Quando fazemos algo com o ❤️, o trabalho se torna arte!',
+      cover: 'assets/artistico.jpg',
+    },
   ]
 
   constructor(
     private fb: FormBuilder,
     private addressResource: AddressResource,
+    private router: Router,
   ) { }
+
+  get socialMedias() {
+    return this.resumeForm.controls['socialMedias'] as FormArray;
+  }
 
   get courses() {
     return this.resumeForm.controls['courses'] as FormArray;
@@ -35,6 +90,14 @@ export class GenerateResumeComponent implements OnInit {
 
   get jobs() {
     return this.resumeForm.controls['jobs'] as FormArray;
+  }
+
+  get certifications() {
+    return this.resumeForm.controls['certifications'] as FormArray;
+  }
+
+  get additionalInformations() {
+    return this.resumeForm.controls['additionalInformations'] as FormArray;
   }
 
   ngOnInit(): void {
@@ -49,6 +112,12 @@ export class GenerateResumeComponent implements OnInit {
       phone: [''],
       cellphone: [''],
       email: ['', [Validators.email]],
+      socialMedias: this.fb.array([
+        this.fb.group({
+          name: [''],
+          url: [''],
+        }),
+      ]),
       courses: this.fb.array([
         this.fb.group({
           name: [''],
@@ -65,6 +134,20 @@ export class GenerateResumeComponent implements OnInit {
         }),
       ]),
       skills: [null],
+      certifications: this.fb.array([
+        this.fb.group({
+          name: [''],
+          institution: [''],
+          yearOfConclusion: [''],
+          yearOfExpiration: [''],
+        }),
+      ]),
+      additionalInformations: this.fb.array([
+        this.fb.group({
+          additionalInformation: [''],
+        }),
+      ]),
+      theme: [null],
     });
   }
 
@@ -90,6 +173,19 @@ export class GenerateResumeComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  addSocialMedia() {
+    const socialMediaForm = this.fb.group({
+      name: [''],
+      url: [''],
+    });
+
+    this.socialMedias.push(socialMediaForm);
+  }
+
+  deleteSocialMedia(socialMediaIndex: number) {
+    this.socialMedias.removeAt(socialMediaIndex);
   }
 
   addCourse() {
@@ -121,8 +217,36 @@ export class GenerateResumeComponent implements OnInit {
     this.jobs.removeAt(jobIndex);
   }
 
+  addCertification() {
+    const certificationForm = this.fb.group({
+      name: [''],
+      institution: [''],
+      yearOfConclusion: [''],
+      yearOfExpiration: [''],
+    });
+
+    this.certifications.push(certificationForm);
+  }
+
+  deleteCertification(certificationIndex: number) {
+    this.certifications.removeAt(certificationIndex);
+  }
+
+  addAdditionalInformation() {
+    const additionalInformationForm = this.fb.group({
+      additionalInformation: [''],
+    });
+
+    this.additionalInformations.push(additionalInformationForm);
+  }
+
+  deleteAdditionalInformation(additionalInformationIndex: number) {
+    this.additionalInformations.removeAt(additionalInformationIndex);
+  }
+
   generateResume(): void {
     console.log(this.resumeForm.value);
+    this.router.navigateByUrl('/resume', { state: this.resumeForm.value });
   }
 
   resetForm(): void {

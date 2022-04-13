@@ -126,7 +126,67 @@
     </div>
   </div>
 
-  <nz-divider nzText="2. Formação Acadêmica" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider nzText="2. Redes Sociais e Site Pessoal" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-container formArrayName="socialMedias">
+    <ng-container *ngFor="let socialMediaForm of socialMedias.controls; let i = index">
+      <div [formGroupName]="i">
+        <div nz-row [nzGutter]="8">
+          <div nz-col [nzSpan]="6">
+            <nz-form-item>
+              <nz-form-label nzFor="socialMediaName">
+                Rede Social
+              </nz-form-label>
+
+              <nz-form-control>
+                <nz-select formControlName="name">
+                  <nz-option *ngFor="let socialMedia of socialMediasList" nzCustomContent [nzLabel]="socialMedia.name"
+                    [nzValue]="socialMedia.name">
+                    <i nz-icon [nzType]="socialMedia.icon"></i>
+                    {{ socialMedia.name }}
+                  </nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="16">
+            <nz-form-item>
+              <nz-form-label nzFor="socialMediaName">
+                URL
+              </nz-form-label>
+
+              <nz-form-control>
+                <input nz-input placeholder="URL" formControlName="url" attr.id="url" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="1" *ngIf="i > 0">
+            <nz-form-item>
+              <nz-form-label></nz-form-label>
+
+              <button nz-button nzType="primary" nzDanger (click)="deleteSocialMedia(i)">
+                <i nz-icon nzType="delete" nzTheme="outline"></i>
+              </button>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="1" *ngIf="socialMedias.controls.length === i + 1">
+            <nz-form-item>
+              <nz-form-label></nz-form-label>
+
+              <button nz-button nzType="primary" (click)="addSocialMedia()">
+                <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+              </button>
+            </nz-form-item>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <nz-divider nzText="3. Formação Acadêmica" nzOrientation="left" class="divider"></nz-divider>
 
   <ng-container formArrayName="courses">
     <ng-container *ngFor="let courseForm of courses.controls; let i = index">
@@ -191,7 +251,7 @@
     </ng-container>
   </ng-container>
 
-  <nz-divider nzText="3. Experiência Profissional" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider nzText="4. Experiência Profissional" nzOrientation="left" class="divider"></nz-divider>
 
   <ng-container formArrayName="jobs">
     <ng-container *ngFor="let jobForm of jobs.controls; let i = index">
@@ -269,7 +329,7 @@
     </ng-container>
   </ng-container>
 
-  <nz-divider nzText="4. Qualificações" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider nzText="5. Qualificações" nzOrientation="left" class="divider"></nz-divider>
 
   <div nz-row [nzGutter]="8">
     <div nz-col [nzSpan]="24">
@@ -284,12 +344,141 @@
     </div>
   </div>
 
-  <nz-divider nzText="5. Certificados" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider nzText="6. Certificados" nzOrientation="left" class="divider"></nz-divider>
 
-  <nz-divider nzText="6. Informações Adicionais" nzOrientation="left" class="divider"></nz-divider>
+  <ng-container formArrayName="certifications">
+    <ng-container *ngFor="let certificationForm of certifications.controls; let i = index">
+      <div [formGroupName]="i">
+        <div nz-row [nzGutter]="8">
+          <div nz-col [nzSpan]="8">
+            <nz-form-item>
+              <nz-form-label nzFor="certificationName">
+                Curso
+              </nz-form-label>
+
+              <nz-form-control>
+                <input nz-input placeholder="Curso" formControlName="name" attr.id="certificationName" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <nz-form-item>
+              <nz-form-label nzFor="institution">
+                Instituição
+              </nz-form-label>
+
+              <nz-form-control>
+                <input nz-input placeholder="Instituição" formControlName="institution" attr.id="institution" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="3">
+            <nz-form-item>
+              <nz-form-label nzFor="yearOfConclusion">
+                Ano de Conclusão
+              </nz-form-label>
+
+              <nz-date-picker nzMode="year" formControlName="yearOfConclusion" attr.id="yearOfConclusion">
+              </nz-date-picker>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="3">
+            <nz-form-item>
+              <nz-form-label nzFor="yearOfExpiration">
+                Ano de Validade
+              </nz-form-label>
+
+              <nz-date-picker nzMode="year" formControlName="yearOfExpiration" attr.id="yearOfExpiration">
+              </nz-date-picker>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="1" *ngIf="i > 0">
+            <nz-form-item>
+              <nz-form-label></nz-form-label>
+
+              <button nz-button nzType="primary" nzDanger (click)="deleteCertification(i)">
+                <i nz-icon nzType="delete" nzTheme="outline"></i>
+              </button>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="1" *ngIf="certifications.controls.length === i + 1">
+            <nz-form-item>
+              <nz-form-label></nz-form-label>
+
+              <button nz-button nzType="primary" (click)="addCertification()">
+                <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+              </button>
+            </nz-form-item>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <nz-divider nzText="7. Informações Adicionais" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-container formArrayName="additionalInformations">
+    <ng-container *ngFor="let additionalInformationForm of additionalInformations.controls; let i = index">
+      <div [formGroupName]="i">
+        <div nz-row [nzGutter]="8">
+          <div nz-col [nzSpan]="22">
+            <nz-form-item>
+              <nz-form-label nzFor="additionalInformation"></nz-form-label>
+
+              <nz-form-control>
+                <input nz-input placeholder="Informação Adicional" formControlName="additionalInformation"
+                  attr.id="additionalInformation" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="1" *ngIf="i > 0">
+            <nz-form-item>
+              <nz-form-label></nz-form-label>
+
+              <button nz-button nzType="primary" nzDanger (click)="deleteAdditionalInformation(i)">
+                <i nz-icon nzType="delete" nzTheme="outline"></i>
+              </button>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="1" *ngIf="additionalInformations.controls.length === i + 1">
+            <nz-form-item>
+              <nz-form-label></nz-form-label>
+
+              <button nz-button nzType="primary" (click)="addAdditionalInformation()">
+                <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+              </button>
+            </nz-form-item>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <nz-divider nzText="8. Tema" nzOrientation="left" class="divider"></nz-divider>
+
+  <div nz-row [nzGutter]="8">
+    <div nz-col [nzSpan]="8" *ngFor="let card of themeCards">
+      <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate"
+        [ngClass]="{ 'card-selected': resumeForm.get('theme')?.value === card.id }"
+        (click)="resumeForm.get('theme')?.setValue(card.id)">
+        <nz-card-meta [nzTitle]="card.title" [nzDescription]="card.description"></nz-card-meta>
+      </nz-card>
+
+      <ng-template #coverTemplate>
+        <img [alt]="card.description" [src]="card.cover" />
+      </ng-template>
+    </div>
+  </div>
 
   <nz-divider class="divider"></nz-divider>
 
   <button nz-button nzType="primary" (click)="generateResume()">Gerar Currículo</button>
-  <button nz-button nzType="primary" nzDanger (click)="resetForm()" class="clear_button">Limpar Formulário</button>
+  <button nz-button nzType="primary" nzDanger (click)="resetForm()" class="clear-button">Limpar Formulário</button>
 </form>
