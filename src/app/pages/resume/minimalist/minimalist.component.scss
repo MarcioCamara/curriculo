@@ -1,6 +1,8 @@
 .resume-container {
   border: 1px solid #f0f0f0;
-  padding: 32px;
+  padding: 64px;
+  border-bottom: none;
+  min-width: 210mm;
 }
 
 .resume-name {
@@ -58,4 +60,12 @@
 
 .print-button {
   margin-left: 8px;
+}
+
+button {
+  margin-top: 16px;
+}
+
+.button-container {
+  justify-content: space-between;
 }

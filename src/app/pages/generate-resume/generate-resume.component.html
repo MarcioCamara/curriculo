@@ -1,30 +1,46 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+  <nz-breadcrumb-item routerLink="generate-resume">Gerar Currículo</nz-breadcrumb-item>
+</nz-breadcrumb>
+
 <h3 nz-typography>
   Preencha seus dados 💼, escolha um tema 🎨, baixe seu currículo ❤️
 </h3>
 
 <form nz-form [formGroup]="resumeForm" nzLayout="vertical">
-  <nz-divider nzText="1. Dados Pessoais" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider [nzText]="personalDataDivider" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-template #personalDataDivider>
+    1. Dados Pessoais
+
+    <i nz-tooltip [nzTooltipTitle]="personalDataDescription" nz-icon nzType="question-circle"></i>
+
+    <ng-template #personalDataDescription>
+      Esta sessão trata-se basicamente do seu cartão de visitas dentro do currículo. Os campos são tão importantes que
+      todos são obrigatórios!
+    </ng-template>
+  </ng-template>
 
   <div nz-row [nzGutter]="8">
-    <div nz-col [nzSpan]="14">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="14">
       <nz-form-item>
-        <nz-form-label nzFor="name">
+        <nz-form-label nzFor="name" nzRequired>
           Nome
         </nz-form-label>
 
-        <nz-form-control>
+        <nz-form-control nzErrorTip="O campo Nome não pode ser vazio">
           <input nz-input placeholder="Nome" formControlName="name" attr.id="name" />
         </nz-form-control>
       </nz-form-item>
     </div>
 
-    <div nz-col [nzSpan]="10">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="10">
       <nz-form-item>
-        <nz-form-label nzFor="desiredRole">
+        <nz-form-label nzFor="desiredRole" nzRequired>
           Cargo Desejado
         </nz-form-label>
 
-        <nz-form-control>
+        <nz-form-control nzErrorTip="O campo Cargo Desejado não pode ser vazio">
           <input nz-input placeholder="Cargo Desejado" formControlName="desiredRole" attr.id="desiredRole" />
         </nz-form-control>
       </nz-form-item>
@@ -33,7 +49,7 @@
 
   <nz-spin nzTip="Carregando..." [nzSpinning]="isLoading">
     <div nz-row [nzGutter]="8">
-      <div nz-col [nzSpan]="4">
+      <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="4">
         <nz-form-item>
           <nz-form-label nzFor="postalCode">
             CEP
@@ -46,37 +62,37 @@
         </nz-form-item>
       </div>
 
-      <div nz-col [nzSpan]="10">
+      <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="10">
         <nz-form-item>
-          <nz-form-label nzFor="address">
+          <nz-form-label nzFor="address" nzRequired>
             Endereço
           </nz-form-label>
 
-          <nz-form-control>
+          <nz-form-control nzErrorTip="O campo Endereço não pode ser vazio">
             <input nz-input placeholder="Endereço" formControlName="address" attr.id="address" />
           </nz-form-control>
         </nz-form-item>
       </div>
 
-      <div nz-col [nzSpan]="8">
+      <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="8">
         <nz-form-item>
-          <nz-form-label nzFor="block">
+          <nz-form-label nzFor="block" nzRequired>
             Bairro
           </nz-form-label>
 
-          <nz-form-control>
+          <nz-form-control nzErrorTip="O campo Bairro não pode ser vazio">
             <input nz-input placeholder="Bairro" formControlName="block" attr.id="block" />
           </nz-form-control>
         </nz-form-item>
       </div>
 
-      <div nz-col [nzSpan]="2">
+      <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="2">
         <nz-form-item>
-          <nz-form-label nzFor="state">
+          <nz-form-label nzFor="state" nzRequired>
             Estado
           </nz-form-label>
 
-          <nz-form-control>
+          <nz-form-control nzErrorTip="O campo Estado não pode ser vazio">
             <nz-select formControlName="state">
               <nz-option *ngFor="let state of states" [nzValue]="state" [nzLabel]="state"></nz-option>
             </nz-select>
@@ -87,64 +103,87 @@
   </nz-spin>
 
   <div nz-row [nzGutter]="8">
-    <div nz-col [nzSpan]="7">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="7">
       <nz-form-item>
-        <nz-form-label nzFor="phone">
+        <nz-form-label nzFor="phone" nzRequired>
           Telefone
         </nz-form-label>
 
-        <nz-form-control>
+        <nz-form-control nzErrorTip="O campo Telefone não pode ser vazio">
           <input nz-input type="tel" placeholder="(00) 0000-0000" formControlName="phone" attr.id="phone"
             mask="(00) 0000-0000" />
         </nz-form-control>
       </nz-form-item>
     </div>
 
-    <div nz-col [nzSpan]="7">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="7">
       <nz-form-item>
-        <nz-form-label nzFor="cellphone">
+        <nz-form-label nzFor="cellphone" nzRequired>
           Celular
         </nz-form-label>
 
-        <nz-form-control>
+        <nz-form-control nzErrorTip="O campo Celular não pode ser vazio">
           <input nz-input type="tel" placeholder="(00) 00000-0000" formControlName="cellphone" attr.id="cellphone"
             mask="(00) 00000-0000" />
         </nz-form-control>
       </nz-form-item>
     </div>
 
-    <div nz-col [nzSpan]="10">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="10">
       <nz-form-item>
-        <nz-form-label nzFor="email">
+        <nz-form-label nzFor="email" nzRequired>
           E-mail
         </nz-form-label>
 
-        <nz-form-control>
+        <nz-form-control nzErrorTip="O campo E-mail não pode ser vazio">
           <input nz-input type="email" placeholder="exemplo@exemplo" formControlName="email" attr.id="email" />
         </nz-form-control>
       </nz-form-item>
     </div>
   </div>
 
-  <nz-divider nzText="2. Resumo" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider [nzText]="summaryDivider" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-template #summaryDivider>
+    2. Resumo
+
+    <i nz-tooltip [nzTooltipTitle]="summaryDescription" nz-icon nzType="question-circle"></i>
+
+    <ng-template #summaryDescription>
+      Nesta sessão você deve fazer um pequeno resumo, contando um pouco sobre você, suas aspirações, sua história, etc.
+      Lembre-se: mantenha-se breve. Até 3 linhas são o suficiente (:
+    </ng-template>
+  </ng-template>
 
   <div nz-row [nzGutter]="8">
-    <div nz-col [nzSpan]="24">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="24">
       <nz-form-item>
         <nz-form-control>
-          <textarea nz-input placeholder="Resumo" formControlName="summary" attr.id="summary" rows="5"></textarea>
+          <textarea nz-input placeholder="Resumo" formControlName="summary" attr.id="summary" rows="3"></textarea>
         </nz-form-control>
       </nz-form-item>
     </div>
   </div>
 
-  <nz-divider nzText="3. Redes Sociais e Site Pessoal" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider [nzText]="socialMediaDivider" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-template #socialMediaDivider>
+    3. Redes Sociais e Site Pessoal
+
+    <i nz-tooltip [nzTooltipTitle]="socialMediaDescription" nz-icon nzType="question-circle"></i>
+
+    <ng-template #socialMediaDescription>
+      Coloque aqui suas redes sociais que achar interessante um(a) recrutador(a) saber, como LinkedIn, Instagram, etc.
+      Pode ser útil para que o(a) recrutador(a) entenda um pouco melhor como você se relaciona com outras pessoas dentro
+      e fora do âmbito profissional
+    </ng-template>
+  </ng-template>
 
   <ng-container formArrayName="socialMedias">
     <ng-container *ngFor="let socialMediaForm of socialMedias.controls; let i = index">
       <div [formGroupName]="i">
         <div nz-row [nzGutter]="8">
-          <div nz-col [nzSpan]="6">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="6">
             <nz-form-item>
               <nz-form-label nzFor="socialMediaName">
                 Rede Social
@@ -162,7 +201,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="4">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="4">
             <nz-form-item>
               <nz-form-label nzFor="username">
                 Nome de Usuário
@@ -174,7 +213,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="12">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="12">
             <nz-form-item>
               <nz-form-label nzFor=" socialMediaName">
                 URL
@@ -186,7 +225,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="1" *ngIf="i > 0">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="1" *ngIf="i > 0">
             <nz-form-item>
               <nz-form-label></nz-form-label>
 
@@ -196,7 +235,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="1" *ngIf="socialMedias.controls.length === i + 1">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="1" *ngIf="socialMedias.controls.length === i + 1">
             <nz-form-item>
               <nz-form-label></nz-form-label>
 
@@ -210,13 +249,26 @@
     </ng-container>
   </ng-container>
 
-  <nz-divider nzText="4. Formação Acadêmica" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider [nzText]="coursesDivider" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-template #coursesDivider>
+    4. Formação Acadêmica
+
+    <i nz-tooltip [nzTooltipTitle]="coursesDescription" nz-icon nzType="question-circle"></i>
+
+    <ng-template #coursesDescription>
+      Aqui deve ser descrita sua formação mais recente e/ou relevante para a vaga que deseja assumir na empresa. Caso
+      possua Ensino Superior (faculdade, mestrado, doutorado, etc), não há necessidade de também ensino médio,
+      fundamental, etc. Caso contrário, preencha com seu nível de ensino (Ensino Médio, Ensino Fundamental, Ensino
+      Infantil, [Completo ou Incompleto], etc)
+    </ng-template>
+  </ng-template>
 
   <ng-container formArrayName="courses">
     <ng-container *ngFor="let courseForm of courses.controls; let i = index">
       <div [formGroupName]="i">
         <div nz-row [nzGutter]="8">
-          <div nz-col [nzSpan]="9">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="9">
             <nz-form-item>
               <nz-form-label nzFor="courseName">
                 Curso
@@ -228,7 +280,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="9">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="9">
             <nz-form-item>
               <nz-form-label nzFor="institution">
                 Instituição
@@ -240,7 +292,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="4">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="4">
             <nz-form-item>
               <nz-form-label nzFor="yearOfConclusion">
                 Ano de Conclusão
@@ -251,7 +303,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="1" *ngIf="i > 0">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="1" *ngIf="i > 0">
             <nz-form-item>
               <nz-form-label></nz-form-label>
 
@@ -261,7 +313,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="1" *ngIf="courses.controls.length === i + 1">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="1" *ngIf="courses.controls.length === i + 1">
             <nz-form-item>
               <nz-form-label></nz-form-label>
 
@@ -275,13 +327,24 @@
     </ng-container>
   </ng-container>
 
-  <nz-divider nzText="5. Experiência Profissional" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider [nzText]="jobsDivider" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-template #jobsDivider>
+    5. Experiência Profissional
+
+    <i nz-tooltip [nzTooltipTitle]="jobsDescription" nz-icon nzType="question-circle"></i>
+
+    <ng-template #jobsDescription>
+      Nesta sessão coloque por volta das 3 últimas experiências mais recentes e relevantes para a vaga que está
+      buscando. Lembre-se de preencher todos dados corretamente e com informações precisas.
+    </ng-template>
+  </ng-template>
 
   <ng-container formArrayName="jobs">
     <ng-container *ngFor="let jobForm of jobs.controls; let i = index">
       <div [formGroupName]="i">
         <div nz-row [nzGutter]="8">
-          <div nz-col [nzSpan]="6">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="6">
             <nz-form-item>
               <nz-form-label nzFor="enterprise">
                 Empresa
@@ -293,31 +356,20 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="3">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="4">
             <nz-form-item>
-              <nz-form-label nzFor="entry">
-                Mês/Ano Entrada
+              <nz-form-label nzFor="period">
+                Período (Entrada/Saída)
               </nz-form-label>
 
               <nz-form-control>
-                <input nz-input placeholder="mm/aaaa" formControlName="entry" attr.id="entry" />
+                <nz-range-picker nzMode="month" formControlName="period" attr.id="period" [nzAllowClear]="true"
+                  nzFormat="MMM/yyyy"></nz-range-picker>
               </nz-form-control>
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="3">
-            <nz-form-item>
-              <nz-form-label nzFor="departure">
-                Mês/Ano Saída
-              </nz-form-label>
-
-              <nz-form-control>
-                <input nz-input placeholder="mm/aaaa" formControlName="departure" attr.id="departure" />
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-
-          <div nz-col [nzSpan]="7">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="7">
             <nz-form-item>
               <nz-form-label nzFor="role">
                 Cargo
@@ -329,7 +381,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="3">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="5">
             <nz-form-item>
               <nz-form-label nzFor="location">
                 Cidade/Estado
@@ -341,7 +393,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="1" *ngIf="i > 0">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="1" *ngIf="i > 0">
             <nz-form-item>
               <nz-form-label></nz-form-label>
 
@@ -351,7 +403,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="1" *ngIf="jobs.controls.length === i + 1">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="1" *ngIf="jobs.controls.length === i + 1">
             <nz-form-item>
               <nz-form-label></nz-form-label>
 
@@ -365,10 +417,23 @@
     </ng-container>
   </ng-container>
 
-  <nz-divider nzText="6. Qualificações" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider [nzText]="skillsDivider" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-template #skillsDivider>
+    6. Qualificações
+
+    <i nz-tooltip [nzTooltipTitle]="skillsDescription" nz-icon nzType="question-circle"></i>
+
+    <ng-template #skillsDescription>
+      Coloque aqui todas as habilidades e qualificações que você acredita que seriam importantes para a vaga desejada e
+      que agregariam algum valor para a empresa. Se você busca uma vaga como programador, pode colocar as linguagens com
+      as quais trabalha, as habilidades em aplicativos e programas que possui, etc. Se é mecânico diesel, pode
+      especificar quais modelos mais trabalhou, em quais partes é especialista, etc.
+    </ng-template>
+  </ng-template>
 
   <div nz-row [nzGutter]="8">
-    <div nz-col [nzSpan]="24">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="24">
       <nz-form-item>
         <nz-form-control>
           <nz-select nzMode="tags" nzPlaceHolder="Qualificações" formControlName="skills" nzSize="large">
@@ -380,13 +445,25 @@
     </div>
   </div>
 
-  <nz-divider nzText="7. Certificados" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider [nzText]="certificationsDivider" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-template #certificationsDivider>
+    7. Certificados
+
+    <i nz-tooltip [nzTooltipTitle]="certificationsDescription" nz-icon nzType="question-circle"></i>
+
+    <ng-template #certificationsDescription>
+      Esta sessão é dedicada para preenchimento de todos cursos que você tenha realizado que geraram algum certificado.
+      Lembre-se de colocar apenas os que serão relevantes para a vaga desejada. Preencha todas informações e caso o
+      certificado não possua uma data de validade, deixe o campo vazio.
+    </ng-template>
+  </ng-template>
 
   <ng-container formArrayName="certifications">
     <ng-container *ngFor="let certificationForm of certifications.controls; let i = index">
       <div [formGroupName]="i">
         <div nz-row [nzGutter]="8">
-          <div nz-col [nzSpan]="8">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="8">
             <nz-form-item>
               <nz-form-label nzFor="certificationName">
                 Curso
@@ -398,7 +475,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="8">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="8">
             <nz-form-item>
               <nz-form-label nzFor="institution">
                 Instituição
@@ -410,7 +487,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="3">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="3">
             <nz-form-item>
               <nz-form-label nzFor="yearOfConclusion">
                 Ano de Conclusão
@@ -421,7 +498,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="3">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="3">
             <nz-form-item>
               <nz-form-label nzFor="yearOfExpiration">
                 Ano de Validade
@@ -432,7 +509,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="1" *ngIf="i > 0">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="1" *ngIf="i > 0">
             <nz-form-item>
               <nz-form-label></nz-form-label>
 
@@ -442,7 +519,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="1" *ngIf="certifications.controls.length === i + 1">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="1" *ngIf="certifications.controls.length === i + 1">
             <nz-form-item>
               <nz-form-label></nz-form-label>
 
@@ -456,13 +533,25 @@
     </ng-container>
   </ng-container>
 
-  <nz-divider nzText="8. Informações Adicionais" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider [nzText]="additionalInformationsDivider" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-template #additionalInformationsDivider>
+    8. Informações Adicionais
+
+    <i nz-tooltip [nzTooltipTitle]="additionalInformationsDescription" nz-icon nzType="question-circle"></i>
+
+    <ng-template #additionalInformationsDescription>
+      Gostaria de adicionar alguma informação extra que não se encaixa em nenhuma outra sessão? Agora é o momento. Aqui
+      você pode colocar informações como nível de inglês, categoria da CNH, disponibilidades para início imediato e/ou
+      para viagens, trabalhos voluntários, etc. Lembre-se: relevância.
+    </ng-template>
+  </ng-template>
 
   <ng-container formArrayName="additionalInformations">
     <ng-container *ngFor="let additionalInformationForm of additionalInformations.controls; let i = index">
       <div [formGroupName]="i">
         <div nz-row [nzGutter]="8">
-          <div nz-col [nzSpan]="22">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="22">
             <nz-form-item>
               <nz-form-label nzFor="additionalInformation"></nz-form-label>
 
@@ -473,7 +562,7 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="1" *ngIf="i > 0">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="1" *ngIf="i > 0">
             <nz-form-item>
               <nz-form-label></nz-form-label>
 
@@ -483,7 +572,8 @@
             </nz-form-item>
           </div>
 
-          <div nz-col [nzSpan]="1" *ngIf="additionalInformations.controls.length === i + 1">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="1"
+            *ngIf="additionalInformations.controls.length === i + 1">
             <nz-form-item>
               <nz-form-label></nz-form-label>
 
@@ -497,24 +587,55 @@
     </ng-container>
   </ng-container>
 
-  <nz-divider nzText="9. Tema" nzOrientation="left" class="divider"></nz-divider>
+  <nz-divider [nzText]="themeDivider" nzOrientation="left" class="divider"></nz-divider>
+
+  <ng-template #themeDivider>
+    9. Tema
+
+    <i nz-tooltip [nzTooltipTitle]="themeDescription" nz-icon nzType="question-circle"></i>
+
+    <ng-template #themeDescription>
+      Selecione uma das 3 opções disponíveis de modelo de currículo, de acordo com sua preferência e perfil da vaga
+      desejada
+    </ng-template>
+  </ng-template>
 
   <div nz-row [nzGutter]="8">
-    <div nz-col [nzSpan]="8" *ngFor="let card of themeCards">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="8" *ngFor="let card of themeCards">
       <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate"
-        [ngClass]="{ 'card-selected': resumeForm.get('theme')?.value === card.id }"
-        (click)="resumeForm.get('theme')?.setValue(card.id)">
+        [ngClass]="{ 'card-selected': resumeForm.get('theme')?.value === card.id }" class="theme-card"
+        (click)="resumeForm.get('theme')?.setValue(1)">
         <nz-card-meta [nzTitle]="card.title" [nzDescription]="card.description"></nz-card-meta>
       </nz-card>
 
       <ng-template #coverTemplate>
-        <img [alt]="card.description" [src]="card.cover" />
+        <div class="img-overlay" *ngIf="card.id !== 1; else released">
+          <img [alt]="card.description" [src]="card.cover" />
+
+          <div class="overlay">
+            <div class="text">
+              Em breve...
+            </div>
+          </div>
+        </div>
+
+        <ng-template #released>
+          <img [alt]="card.description" [src]="card.cover" />
+        </ng-template>
       </ng-template>
     </div>
   </div>
 
   <nz-divider class="divider"></nz-divider>
 
-  <button nz-button nzType="primary" (click)="generateResume()">Gerar Currículo</button>
-  <button nz-button nzType="primary" nzDanger (click)="resetForm()" class="clear-button">Limpar Formulário</button>
+  <div nz-row [nzGutter]="8" class="button-container">
+    <button nz-col nzXs="24" nzSm="24" nzMd="4" nzLg="4" nzXl="4" nz-button nzType="primary" (click)="generateResume()">
+      Gerar Currículo
+    </button>
+
+    <button nz-col nzXs="24" nzSm="24" nzMd="4" nzLg="4" nzXl="4" nz-button nzType="primary" nzDanger
+      (click)="resetForm()" class="clear-button">
+      Limpar Formulário
+    </button>
+  </div>
 </form>

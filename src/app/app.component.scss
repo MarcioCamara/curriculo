@@ -1,5 +1,6 @@
 .layout {
     min-height: 100vh;
+    min-width: min-content;
 }
 
 .logo {
@@ -33,6 +34,7 @@ nz-breadcrumb {
     background: #fff;
     padding: 24px;
     min-height: 380px;
+    margin-top: 48px;
 }
 
 nz-footer {

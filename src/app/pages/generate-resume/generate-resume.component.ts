@@ -15,16 +15,36 @@ export class GenerateResumeComponent implements OnInit {
   selected: any = null;
 
   states = [
-    'SP',
+    'AC',
+    'AL',
+    'AM',
+    'AP',
+    'BA',
+    'CE',
+    'DF',
+    'ES',
+    'GO',
+    'MA',
+    'MG',
+    'MS',
+    'MT',
+    'PA',
+    'PB',
+    'PE',
+    'PI',
+    'PR',
     'RJ',
+    'RN',
+    'RO',
+    'RR',
+    'RS',
+    'SC',
+    'SE',
+    'SP',
+    'TO',
   ];
 
-  skillsList = [
-    'Java',
-    'Angular',
-    'Laravel',
-    'PHP',
-  ];
+  skillsList = [];
 
   socialMediasList = [
     {
@@ -102,15 +122,15 @@ export class GenerateResumeComponent implements OnInit {
 
   ngOnInit(): void {
     this.resumeForm = this.fb.group({
-      name: [''],
-      desiredRole: [''],
+      name: ['', [Validators.required]],
+      desiredRole: ['', [Validators.required]],
       postalCode: [''],
-      address: [''],
-      block: [''],
-      state: [''],
-      city: [''],
-      phone: [''],
-      cellphone: [''],
+      address: ['', [Validators.required]],
+      block: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+      cellphone: ['', [Validators.required]],
       email: ['', [Validators.email]],
       summary: [''],
       socialMedias: this.fb.array([
@@ -130,8 +150,7 @@ export class GenerateResumeComponent implements OnInit {
       jobs: this.fb.array([
         this.fb.group({
           enterprise: [''],
-          entry: [''],
-          departure: [''],
+          period: [''],
           role: [''],
           location: [''],
         }),
@@ -150,7 +169,7 @@ export class GenerateResumeComponent implements OnInit {
           additionalInformation: [''],
         }),
       ]),
-      theme: [null],
+      theme: [1],
     });
   }
 
@@ -180,7 +199,8 @@ export class GenerateResumeComponent implements OnInit {
 
   addSocialMedia() {
     const socialMediaForm = this.fb.group({
-      name: [''],
+      username: [''],
+      icon: [''],
       url: [''],
     });
 
@@ -207,10 +227,10 @@ export class GenerateResumeComponent implements OnInit {
 
   addJob() {
     const jobForm = this.fb.group({
-      name: [''],
-      entry: [''],
-      departure: [''],
+      enterprise: [''],
+      period: [''],
       role: [''],
+      location: [''],
     });
 
     this.jobs.push(jobForm);
@@ -248,8 +268,17 @@ export class GenerateResumeComponent implements OnInit {
   }
 
   generateResume(): void {
-    console.log(this.resumeForm.value);
-    this.router.navigateByUrl('/resume', { state: this.resumeForm.value });
+    if (this.resumeForm.valid) {
+      console.log(this.resumeForm.value);
+      this.router.navigateByUrl('/resume', { state: this.resumeForm.value });
+    } else {
+      Object.values(this.resumeForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
 
   resetForm(): void {

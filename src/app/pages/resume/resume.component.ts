@@ -14,7 +14,7 @@ export class ResumeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.resume = this.location.getState();
+    // this.resume = this.location.getState() ? this.location.getState() : {};
 
     this.resume = {
       name: 'Marcio F. Câmara Jr.',
@@ -48,15 +48,19 @@ export class ResumeComponent implements OnInit {
       jobs: [
         {
           enterprise: 'NAVA - Technology for Business',
-          entry: 'Outubro/2021',
-          departure: 'Atual',
+          period: [
+            new Date(),
+            new Date(),
+          ],
           role: 'Analista Programador IV | Santander Geração Digital',
           location: 'São Paulo/SP'
         },
         {
           enterprise: 'Followize Softwares',
-          entry: 'Setembro/2020',
-          departure: 'Setembro/2021',
+          period: [
+            new Date(),
+            new Date(),
+          ],
           role: 'Desenvolvedor Front-End Pleno II',
           location: 'Itu/SP'
         },
