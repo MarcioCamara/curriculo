@@ -24,6 +24,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NgxMaskModule } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -70,6 +71,7 @@ const icons: IconDefinition[] = [
     NzCardModule,
     NzDescriptionsModule,
     NzToolTipModule,
+    NzUploadModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: pt_BR },

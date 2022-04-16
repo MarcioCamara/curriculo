@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resume',
@@ -11,71 +12,76 @@ export class ResumeComponent implements OnInit {
 
   constructor(
     private location: Location,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
-    this.resume = this.location.getState() ? this.location.getState() : {};
+    this.resume = this.location.getState();
 
-    //   this.resume = {
-    //     name: 'Marcio F. Câmara Jr.',
-    //     desiredRole: 'Desenvolvedor Front-End',
-    //     postalCode: '13465-000',
-    //     address: 'Rua Teste, 123',
-    //     block: 'Vl. Teste',
-    //     state: 'SP',
-    //     city: 'Americana',
-    //     phone: '+55 (19) 3465-5678',
-    //     cellphone: '+55 (19) 91234-5678',
-    //     email: 'marciocamarajr@gmail.com',
-    //     summary: 'Desenvolvedor pragmático em desenvolvimento com mais de 7 anos de experiência na área; Profissional certificado Desenvolvedor Angular pela GDE; Profissional certificado Scrum Foundation; Sólidos conhecimentos em padrões de código e Clean Code; Apaixonado por programação e como ela pode mudar o mundo;',
-    //     socialMedias: [
-    //       {
-    //         username: 'camaraxcodes',
-    //         icon: 'linkedin',
-    //         url: 'https://www.linkedin.com/in/camaraxcodes/',
-    //       },
-    //       {
-    //         username: 'camaraxcodes',
-    //         icon: 'instagram',
-    //         url: 'https://www.linkedin.com/in/camaraxcodes/',
-    //       },
-    //     ],
-    //     courses: [{
-    //       name: 'Tecnólogo em Jogos Digitais',
-    //       institution: 'Uninove - Universidade Nove de Julho',
-    //       yearOfConclusion: '2024',
-    //     }],
-    //     jobs: [
-    //       {
-    //         enterprise: 'NAVA - Technology for Business',
-    //         period: [
-    //           new Date(),
-    //           new Date(),
-    //         ],
-    //         role: 'Analista Programador IV | Santander Geração Digital',
-    //         location: 'São Paulo/SP'
-    //       },
-    //       {
-    //         enterprise: 'Followize Softwares',
-    //         period: [
-    //           new Date(),
-    //           new Date(),
-    //         ],
-    //         role: 'Desenvolvedor Front-End Pleno II',
-    //         location: 'Itu/SP'
-    //       },
-    //     ],
-    //     skills: ['Angular', 'SCSS', 'Clean Code'],
-    //     certifications: [{
-    //       name: 'Angular - The Complete Guide',
-    //       institution: 'Udemy',
-    //       yearOfConclusion: '2022',
-    //       yearOfExpiration: '',
-    //     }],
-    //     additionalInformations: [{
-    //       additionalInformation: 'Inglês B1',
-    //     }],
-    //     theme: 1,
-    //   };
+    // if (!this.resume.name) {
+    //   this.router.navigate(['generate-resume']);
     // }
+
+    this.resume = {
+      name: 'Marcio F. Câmara Jr.',
+      desiredRole: 'Desenvolvedor Front-End',
+      postalCode: '13465-000',
+      address: 'Rua Teste, 123',
+      block: 'Vl. Teste',
+      state: 'SP',
+      city: 'Americana',
+      phone: '+55 (19) 3465-5678',
+      cellphone: '+55 (19) 91234-5678',
+      email: 'marciocamarajr@gmail.com',
+      summary: 'Desenvolvedor pragmático em desenvolvimento com mais de 7 anos de experiência na área; Profissional certificado Desenvolvedor Angular pela GDE; Profissional certificado Scrum Foundation; Sólidos conhecimentos em padrões de código e Clean Code; Apaixonado por programação e como ela pode mudar o mundo;',
+      socialMedias: [
+        {
+          username: 'camaraxcodes',
+          icon: 'linkedin',
+          url: 'https://www.linkedin.com/in/camaraxcodes/',
+        },
+        {
+          username: 'camaraxcodes',
+          icon: 'instagram',
+          url: 'https://www.linkedin.com/in/camaraxcodes/',
+        },
+      ],
+      courses: [{
+        name: 'Tecnólogo em Jogos Digitais',
+        institution: 'Uninove - Universidade Nove de Julho',
+        yearOfConclusion: '2024',
+      }],
+      jobs: [
+        {
+          enterprise: 'NAVA - Technology for Business',
+          period: [
+            new Date(),
+            new Date(),
+          ],
+          role: 'Analista Programador IV | Santander Geração Digital',
+          location: 'São Paulo/SP'
+        },
+        {
+          enterprise: 'Followize Softwares',
+          period: [
+            new Date(),
+            new Date(),
+          ],
+          role: 'Desenvolvedor Front-End Pleno II',
+          location: 'Itu/SP'
+        },
+      ],
+      skills: ['Angular', 'SCSS', 'Clean Code'],
+      certifications: [{
+        name: 'Angular - The Complete Guide',
+        institution: 'Udemy',
+        yearOfConclusion: '2022',
+        yearOfExpiration: '',
+      }],
+      additionalInformations: [{
+        additionalInformation: 'Inglês B1',
+      }],
+      theme: 1,
+    };
   }
+}

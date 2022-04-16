@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/models/Address';
 import { AddressResource } from 'src/app/resources/address/address.resource';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-generate-resume',
@@ -266,6 +267,26 @@ export class GenerateResumeComponent implements OnInit {
   deleteAdditionalInformation(additionalInformationIndex: number) {
     this.additionalInformations.removeAt(additionalInformationIndex);
   }
+
+  changeThemeUpload(event: any): void {
+    console.log(event);
+  }
+
+  fileList: NzUploadFile[] = [];
+
+  beforeThemeUpload = (file: NzUploadFile): boolean => {
+    // this.fileList = [];
+    // this.fileList = this.fileList.concat(file);
+
+    this.fileList = [file];
+    const myReader = new FileReader();
+    myReader.readAsDataURL(file as any);
+    myReader.onloadend = (e) => {
+      console.log(myReader.result); // aqui ja tenho o blob "abrivel" no browser, agora preciso descobrir como fazer pra renderizar esse cara no meu site
+    };
+
+    return false;
+  };
 
   generateResume(): void {
     if (this.resumeForm.valid) {

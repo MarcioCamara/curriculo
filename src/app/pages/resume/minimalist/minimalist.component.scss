@@ -2,7 +2,12 @@
   border: 1px solid #f0f0f0;
   padding: 64px;
   border-bottom: none;
-  min-width: 210mm;
+}
+
+@media screen and (max-width: 1199px) {
+  .resume-container {
+    min-width: 230mm;
+  }
 }
 
 .resume-name {

@@ -258,7 +258,7 @@
 
     <ng-template #coursesDescription>
       Aqui deve ser descrita sua formação mais recente e/ou relevante para a vaga que deseja assumir na empresa. Caso
-      possua Ensino Superior (faculdade, mestrado, doutorado, etc), não há necessidade de também ensino médio,
+      possua Ensino Superior (faculdade, mestrado, doutorado, etc), não há necessidade de adicionar ensinos médio,
       fundamental, etc. Caso contrário, preencha com seu nível de ensino (Ensino Médio, Ensino Fundamental, Ensino
       Infantil, [Completo ou Incompleto], etc)
     </ng-template>
@@ -601,7 +601,7 @@
   </ng-template>
 
   <div nz-row [nzGutter]="8">
-    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="8" *ngFor="let card of themeCards">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="6" *ngFor="let card of themeCards">
       <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate"
         [ngClass]="{ 'card-selected': resumeForm.get('theme')?.value === card.id }" class="theme-card"
         (click)="resumeForm.get('theme')?.setValue(1)">
@@ -623,6 +623,20 @@
           <img [alt]="card.description" [src]="card.cover" />
         </ng-template>
       </ng-template>
+    </div>
+
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="6">
+      <nz-upload nzType="drag" [nzMultiple]="false" [(nzFileList)]="fileList" [nzBeforeUpload]="beforeThemeUpload">
+        <p class="ant-upload-drag-icon">
+          <i nz-icon nzType="inbox"></i>
+        </p>
+
+        <p class="ant-upload-text">Click or drag file to this area to upload</p>
+
+        <p class="ant-upload-hint">
+          Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+        </p>
+      </nz-upload>
     </div>
   </div>
 
